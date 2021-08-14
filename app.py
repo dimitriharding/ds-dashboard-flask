@@ -7,6 +7,8 @@ from millify import millify, prettify
 import io
 import base64
 import matplotlib.pyplot as plt
+import zipfile
+from os import path
 
 import scipy.stats as st
 from sklearn.feature_selection import RFE
@@ -32,6 +34,11 @@ app = Flask(__name__)
 
 @app.route('/', methods=["POST", "GET"])
 def index():
+
+    if not path.exists('./data/train.pkl'):
+        with zipfile.ZipFile('./data/train.pkl.zip', 'r') as zip_ref:
+            zip_ref.extractall('./data/')
+
     dataFrame = readPickleFile()
     avg_age = int(get_avg(dataFrame, 'age'))
     avg_income = human_readable(get_avg(dataFrame, 'gross_income'))
