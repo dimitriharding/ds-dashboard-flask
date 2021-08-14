@@ -1,0 +1,8 @@
+file_type: csv
+dataset_name: train
+file_name: Train
+table_name: train_data
+inbound_delimiter: ","
+outbound_delimiter: "|"
+skip_leading_rows: 1
+columns:
